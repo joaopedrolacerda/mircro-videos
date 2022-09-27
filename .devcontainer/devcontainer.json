@@ -8,6 +8,7 @@
 	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
 	"dockerComposeFile": [
 		"../docker-compose.yaml",
+		"../docker-compose.override.yaml",
 		"docker-compose.yml"
 	],
 
@@ -19,8 +20,8 @@
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
 	"workspaceFolder": "/home/node/app",
 	"settings": {
-		"terminal.integrated.defaultProfile.osx": "bash"
-	}
+		"terminal.integrated.defaultProfile.linux": "zsh"
+	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
