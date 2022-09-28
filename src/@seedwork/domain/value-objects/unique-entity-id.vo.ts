@@ -1,16 +1,20 @@
-import InvalidUuidError from '@seedwork/errors/invalid-uuid.error';
-import {v4 as uuidv4, validate as uuidValidate} from 'uuid';
-import ValueObject from './value-object';
-export default class UniqueEntityId extends ValueObject<String> {
-  constructor(readonly id?: string){
-    super( id || uuidv4());
-    this.validate()
-  }
-  private validate(){
-      const isValid = uuidValidate(this._value);
+import { v4 as uuidv4, validate as uuidValidate } from "uuid";
+import InvalidUuidError from "../../errors/invalid-uuid.error";
+import ValueObject from "./value-object";
 
-      if(!isValid){
-        throw new InvalidUuidError();
-      }
+export class UniqueEntityId extends ValueObject<string> {
+  constructor(readonly id?: string) {
+    super(id || uuidv4());
+    this.validate();
+  }
+
+  private validate() {
+    const isValid = uuidValidate(this.value);
+    if (!isValid) {
+      throw new InvalidUuidError();
+    }
   }
 }
+
+export default UniqueEntityId;
+//Projeto é código e o código é projeto
