@@ -1,20 +1,16 @@
 import InvalidUuidError from '@seedwork/errors/invalid-uuid.error';
 import {v4 as uuidv4, validate as uuidValidate} from 'uuid';
-
-export default class UniqueEntityId {
-  constructor(public readonly id?: string){
-    this.id = id || uuidv4();
+import ValueObject from './value-object';
+export default class UniqueEntityId extends ValueObject<String> {
+  constructor(readonly id?: string){
+    super( id || uuidv4());
     this.validate()
-
   }
   private validate(){
-      const isValid = uuidValidate(this.id);
+      const isValid = uuidValidate(this._value);
 
       if(!isValid){
         throw new InvalidUuidError();
       }
   }
-
-
-  
 }

@@ -1,5 +1,5 @@
 import InvalidUuidError from "@seedwork/errors/invalid-uuid.error"
-import UniqueEntityId from "./unique-entity-id.vo"
+import UniqueEntityId from "../unique-entity-id.vo"
 import {validate as uuidValidate} from 'uuid';
 
 
@@ -14,7 +14,7 @@ describe('UniqueEntityId unit tests', () => {
 
   const uuid = "2a9fa50f-9e16-435a-87ca-cc8885a768d1"
   const vo =  new UniqueEntityId(uuid)
-  expect(vo.id).toBe(uuid)
+  expect(vo.value).toBe(uuid)
   expect(validateSpy).toHaveBeenCalled()
   })
 
@@ -22,7 +22,7 @@ describe('UniqueEntityId unit tests', () => {
   
     const uuid = "2a9fa50f-9e16-435a-87ca-cc8885a768d1"
     const vo =  new UniqueEntityId(uuid)
-    expect(uuidValidate(vo.id)).toBeTruthy()
+    expect(uuidValidate(vo.value)).toBeTruthy()
     expect(validateSpy).toHaveBeenCalled()
     })
 })
