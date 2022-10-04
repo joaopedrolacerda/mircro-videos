@@ -66,7 +66,7 @@ describe("Category Unit test", (): void => {
       const category = new Category(i.props, i.id as any);
 
       expect(category.id).not.toBeNull()
-      expect(category.id).toBeInstanceOf(new UniqueEntityId());
+      expect(category.UniqueEntityId).toBeInstanceOf(new UniqueEntityId());
   
     })
     // let category = new Category({name: "Movie"});
@@ -136,5 +136,30 @@ describe("Category Unit test", (): void => {
       
       expect(category.created_at).toBe(created_at)
     });
+  })
+
+  it('should update a category', () => {
+    const category = new Category({name: "movie"});
+    category.update("Documentary", "some description")
+    expect(category.name).toBe("Documentary")
+    expect(category.description).toBe("some description")
+  })
+
+  it('should active a category', () => {
+    const category = new Category({
+      name: "filmes",
+      is_active: false
+    })
+    category.activate();
+    expect(category.is_active).toBeTruthy()
+  })
+
+  test("should disable a category", () => {
+    const category = new Category({
+      name: "filmes",
+      is_active: true
+    })
+    category.activate();
+    expect(category.is_active).toBeFalsy()
   })
 });
