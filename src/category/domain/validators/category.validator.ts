@@ -27,7 +27,7 @@ export class CategoryRules {
 }
 export class CategoryValidator extends ClassValidatorFields<CategoryRules>{
     validat(data: CategoryProperties) {
-      super.validate(new CategoryRules(data))
+      super.validate(new CategoryRules(data ?? {} as any))
     }
 }
 
