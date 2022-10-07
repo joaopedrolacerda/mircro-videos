@@ -67,5 +67,48 @@ describe("Category Integration Tests", () => {
       });
     });
   });
+  describe("update method", () => {
+    it("should a invalid category using name property", () => {
+      const category = new Category({ name: "Movie" });
+      expect(() => category.update(null, null)).containsErrorMessages({
+        name: [
+          "name should not be empty",
+          "name must be a string",
+          "name must be shorter than or equal to 255 characters",
+        ],
+      });
+
+      expect(() => category.update("", null)).containsErrorMessages({
+        name: ["name should not be empty"],
+      });
+
+      expect(() => category.update(5 as any, null)).containsErrorMessages({
+        name: [
+          "name must be a string",
+          "name must be shorter than or equal to 255 characters",
+        ],
+      });
+
+      expect(() =>
+        category.update("t".repeat(256), null)
+      ).containsErrorMessages({
+        name: ["name must be shorter than or equal to 255 characters"],
+      });
+    });
+
+    it("should a invalid category using description property", () => {
+      const category = new Category({ name: "Movie" });
+      expect(() => category.update(null, 5 as any)).containsErrorMessages({
+        description: ["description must be a string"],
+      });
+    });
+
+    it("should a valid category", () => {
+      expect.assertions(0);
+      const category = new Category({ name: "Movie" });
+      category.update("name changed", null);
+      category.update("name changed", "some description");
+    });
+  });
   });
 
